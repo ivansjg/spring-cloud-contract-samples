@@ -26,7 +26,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 // remove::start[]
 import org.springframework.cloud.contract.stubrunner.StubTrigger;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
-import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 // remove::end[]
 import org.springframework.test.context.ActiveProfiles;
@@ -35,8 +34,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 // remove::start[]
-@AutoConfigureStubRunner(ids = "com.example:beer-api-producer-kafka", stubsMode = StubRunnerProperties.StubsMode.LOCAL)
-@EmbeddedKafka(topics = "topic1")
+@AutoConfigureStubRunner
+@EmbeddedKafka(topics = "holly-ilm-service")
 // remove::end[]
 @ActiveProfiles("test")
 public class ApplicationTests {
@@ -45,15 +44,15 @@ public class ApplicationTests {
 	@Autowired
 	StubTrigger trigger;
 	@Autowired
-	Application application;
+	App application;
 
 	@Test
 	public void contextLoads() {
-		this.trigger.trigger("trigger");
+		trigger.trigger("hollyIlmDatasetPurgedMax");
 
 		Awaitility.await().untilAsserted(() -> {
 			BDDAssertions.then(this.application.storedFoo).isNotNull();
-			BDDAssertions.then(this.application.storedFoo.getFoo()).contains("example");
+			BDDAssertions.then(this.application.storedFoo.getFoo()).contains("holly");
 		});
 	}
 	// remove::end[]

@@ -1,4 +1,12 @@
+stubrunner:
+  repository-root: http://repo.mal.internal/content/groups/public
+  stubsPerConsumer: true
+  stubs-mode: remote
+  ids:
+  - internal.holly.ilm:holly-ilm-service:+:stubs
+
 spring:
+  application.name: holly-ilm-fact
   kafka:
     bootstrap-servers: ${spring.embedded.kafka.brokers}
     consumer:
